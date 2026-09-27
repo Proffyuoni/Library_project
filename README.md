@@ -2,12 +2,16 @@
 
 Akan Name Generator: 
 A lightweight Python script that calculates a person's traditional Ghanaian Akan day name (kra-din) based on their date of birth and gender.
+
 Features
+
  Automatically determines the day of the week from a given date.
  Maps the day to the correct traditional male or female Akan name.
  Handles case-insensitive gender inputs (e.g., "MALE", "Female", "male").
  Includes error handling for invalid dates and gender formats.
+ 
 Prerequisites
+
  Python 3.x
  No external libraries required (uses Python's built-in ⁠datetime⁠ module).
  
