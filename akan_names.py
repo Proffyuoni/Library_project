@@ -1,0 +1,58 @@
+from datetime import datetime
+
+
+class AkanNameGenerator:
+    AKAN_NAMES = {
+        'Monday': {'Male': 'Kojo', 'Female': 'Adwoa'},
+        'Tuesday': {'Male': 'Kwabena', 'Female': 'Abena'},
+        'Wednesday': {'Male': 'Kwaku', 'Female': 'Akua'},
+        'Thursday': {'Male': 'Yaw', 'Female': 'Yaa'},
+        'Friday': {'Male': 'Kofi', 'Female': 'Afia'},
+        'Saturday': {'Male': 'Kwame', 'Female': 'Ama'},
+        'Sunday': {'Male': 'Kwesi', 'Female': 'Akosua'},
+    }
+
+    @classmethod
+    def get_name(cls, dob_string: str, gender: str) -> dict:
+        try:
+            dob = datetime.strptime(dob_string, '%Y-%m-%d')
+        except ValueError:
+            raise ValueError(
+                "Invalid date format. Please use 'YYYY-MM-DD' (e.g., '2000-05-15')."
+            )
+
+        normalized_gender = gender.strip().capitalize()
+        if normalized_gender not in ['Male', 'Female']:
+            raise ValueError(
+                "Invalid gender. Please specify either 'Male' or 'Female'."
+            )
+
+        day_of_week = dob.strftime('%A')
+        akan_name = cls.AKAN_NAMES[day_of_week][normalized_gender]
+
+        return {
+            'date_of_birth': dob_string,
+            'day_of_week': day_of_week,
+            'gender': normalized_gender,
+            'akan_name': akan_name,
+        }
+
+
+
+# ...trial examples...
+
+if __name__ == "__main__":
+    try:
+        result_male = AkanNameGenerator.get_name("2007-09-20", "MALE")
+        print(
+            f"Result: {result_male['akan_name']} "
+            f"(Born on {result_male['day_of_week']})"
+        )
+
+        result_female = AkanNameGenerator.get_name("2007-09-20", "FEMALE")
+        print(
+                    f"Result: {result_female['akan_name']} "
+                    f"(Born on {result_female['day_of_week']})"
+                )
+    except ValueError as e:
+      print(f"Invalid input: {e}")
